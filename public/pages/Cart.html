@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Images/Netrix Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Images/Netrix Logo.png">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Netrix - Badminton Centre</title>
+</head>
+<body class="cartWeb">
+    <main class="cartArea">
+        <div class="cart">
+            <h1>Your Cart</h1>
+            <div class="subtitles">
+                <h3>Products Details</h3>
+                <h3>Quantatity</h3>
+                <h3>Price</h3>
+                <h3>Total</h3>
+            </div>
+
+            <div class="products">
+                <div class="prod">
+                    <div class="productDetail">
+                        <img src="../Images/Bag.png">
+                        <h3 class="prodName">Product Name</h3>
+                    </div>
+                    <div class="quantitybox">
+                        <button class="quantitybtn">−</button>
+                        <input type="text" value="01">
+                        <button class="quantitybtn">+</button>
+                    </div>
+                    <h3>4000.00</h3>
+                    <h3>4000.00</h3>
+                    <button class="deleteOrder" title="Delete Order">X</button>
+                </div>
+                <div class="prod">
+                    <div class="productDetail">
+                        <img src="../Images/Bag.png">
+                        <h3 class="prodName">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, facere.</h3>
+                    </div>
+                    <div class="quantitybox">
+                        <button class="quantitybtn">−</button>
+                        <input type="text" value="01">
+                        <button class="quantitybtn">+</button>
+                    </div>
+                    <h3>4000.00</h3>
+                    <h3>4000.00</h3>
+                    <button class="deleteOrder" title="Delete Order">X</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment">
+            <div class="top">
+                <h1>Payment Details</h1>
+                <div class="row">
+                    <h3>Subtotal</h3>
+                    <h3>8000.00</h3>
+                </div>
+                <div class="row">
+                    <h3>Shipping</h3>
+                    <h3>100.00</h3>
+                </div>
+            </div>
+
+            <div class="bottom">
+                <div class="row">
+                    <h3 class="total">Total</h3>
+                    <h3 class="totalAmount">8100.00</h3>
+                </div>
+                <button class="checkout">Checkout</button>
+                <a class="back" onclick="goBack()">&#8592 <span>Go Back Shopping</span></a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/main.js"></script>
+</body>
+</html>

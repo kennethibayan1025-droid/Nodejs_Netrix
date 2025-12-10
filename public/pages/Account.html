@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Images/Netrix Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Images/Netrix Logo.png">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Netrix - Badminton Centre</title>
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <div class="sideBar">
+            <button class="close-btn" onclick="closeSidebar()"><i class="material-icons">close</i></button>
+            <a href="/rackets">Rackets</a>
+            <a href="/grips">Grips</a>
+            <a href="/shuttlecocks">Shuttlecocks</a>
+            <a href="/shoes">Shoes</a>
+            <a href="/bags">Bags</a>
+            <a href="/jerseys">Jerseys</a>
+        </div>
+
+        <div class="top">
+            <div class="left">
+                <button class="menu-btn" onclick="showSidebar()"><i class="material-icons">menu</i></button>
+                <a href="/"><img src="/Images/Netrix Logo.png" alt="" width="120px" height="70px"></a>
+                <a href="/rackets">Rackets</a>
+                <a href="/grips">Grips</a>
+                <a href="/shuttlecocks">Shuttlecocks</a>
+                <a href="/shoes">Shoes</a>
+                <a href="/bags">Bags</a>
+                <a href="/jerseys">Jerseys</a>
+            </div>
+            <div class="right">
+                <a href="/cart">Cart</a>
+                <a href="/login" id="accBtn">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="accountMain">
+        <div class="aside">
+            <h3>My Account</h3>
+            <a class="sidebtn1 active" onclick="openWindow(0)">My Profile</a>
+            <a class="sidebtn2" onclick="openWindow(1)">My Address</a>
+            <a class="sidebtn3" onclick="openWindow(2)">My Order</a>
+            <a class="sidebtn4" onclick="openWindow(3)">Manage Account</a>
+            <a class="signOut">Sign Out</a>
+        </div>
+
+        <div class="profile active">
+            <h1>My Profile</h1>
+            <p>You can modify your personal information here.</p>
+
+            <label>Email</label>
+            <input type="text" id="emailDisplay" disabled/>
+
+            <div class="name-fields">
+                <div class="field">
+                    <label>First Name</label>
+                    <input type="text" id="firstnameDisplay" disabled/>
+                </div>
+                <div class="field">
+                    <label>Last Name</label>
+                    <input type="text" id="lastnameDisplay" disabled/>
+                </div>
+            </div>
+        </div>
+
+        <div class="address">
+            <h1>My Address</h1>
+            <p>You can select and create address here</p>
+
+            <div class="add">
+                <h2>Full Name</h2>
+                <p>Full Name</p>
+                <p>1234 Receiver Street</p>
+                <p>1740 Las Piñas</p>
+                <p>Philippines</p>
+            </div>
+
+            <div class="actions">
+                <button class="editAddress">Edit</button>
+                <button class="deleteAddress">Delete</button>
+            </div>
+        </div>
+
+        <div class="order">
+            <h1>My Orders</h1>
+
+            <div class="empty">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                    <path d="m19,22c0,1.105-.895,2-2,2s-2-.895-2-2,.895-2,2-2,2,.895,2,2Zm-12-2c-1.105,0-2,.895-2,2s.895,2,2,2,2-.895,2-2-.895-2-2-2Zm11.09-5H7.405c-.25,0-.463-.186-.495-.434l-.876-6.566h6.966v-3h-7.366l-.262-1.963c-.231-1.731-1.723-3.037-3.47-3.037H0v3h1.902c.25,0,.464.187.496.434l1.537,11.527c.23,1.732,1.722,3.039,3.47,3.039h12.966l1.939-7h-3.112l-1.108,4Zm5.884-12.853L21.853.026l-2.353,2.353L17.147.026l-2.121,2.121,2.353,2.353-2.353,2.353,2.121,2.121,2.353-2.353,2.353,2.353,2.121-2.121-2.353-2.353,2.353-2.353Z"/>
+                </svg>
+                <p>No Orders Yet.</p>
+                <a href="Rackets.html">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="manage">
+            <h1>Manage Account</h1>
+
+            <div class="email">
+                <h2>Email</h2>
+                <p>123example@gmail.com</p>
+            </div>
+            <div class="password">
+                <h2>Password</h2>
+                <p>Manage your password</p>
+                <a href="">Change Password</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/functions.js"></script>
+    <script src="../scripts/main.js"></script>
+</body>
+</html>

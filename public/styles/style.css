@@ -1,0 +1,1828 @@
+/* ---------------------------------------- */
+/*               VARIABLES                  */
+/* ---------------------------------------- */
+:root {
+    /* -------------------------------- */
+    /*              COLORS              */
+    /* -------------------------------- */
+    /* ---------- Base ---------- */
+    --white: #ffffff;
+    --black: #000000;
+
+    /* ---------- Black Variants ---------- */
+    --black-soft: #00000085;            /* used as semi-transparent black */
+    --black-light: rgba(0, 0, 0, 0.247);/* used for translucent backgrounds */
+    --black-bg: rgba(0, 0, 0, 0.842);   /* page background */
+
+    /* ---------- Grays ---------- */
+    --gray-ccc: #ccc;
+    --gray-333: #333;
+    --gray-4d: #4d4d4d;
+    --gray-979: #979797;
+    --gray-155-836: rgba(155, 155, 155, 0.836);
+    --gray-151-315: rgba(151, 148, 148, 0.315);
+
+    /* ---------- Yellow / Brand ---------- */
+    --yellow: #FFD500;
+    --yellow-dark: #bea213;
+
+    /* ---------- Reds ---------- */
+    --red: red;
+    --red-light: rgb(212, 46, 46);
+    --red-mid: rgba(219, 29, 29, 0.733);
+    --red-strong: #d40000;
+    --red-soft: #ff4747;
+    --red-hover: rgb(255, 61, 61);
+
+    /* ---------- Banner / Accent ---------- */
+    --banner-title: #ff2e2e;
+
+    /* ---------- Card / Dark ---------- */
+    --card-bg: #222;
+    --card-inner-bg: #242323;
+    --dark-1f: #1f1d1d;
+    --dark-1b: #1b1b1b;
+    --dark-49: rgb(49, 49, 49);
+
+    /* ---------- Misc ---------- */
+    --login-bg: #000000bd;
+    --black-52: #00000052; /* semi-transparent black hex used for borders */
+
+    /* ---------- Gradient helpers ---------- */
+    --lg-light: rgba(218, 218, 218, 0.719);
+    --lg-mid: rgba(128, 128, 128, 0.651);
+
+    /* -------------------------------- */
+    /*              FONTS               */
+    /* -------------------------------- */
+
+
+}
+
+/* ---------------------------------------- */
+/*                BASE STYLES               */
+/* ---------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: auto;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: var(--black-bg);
+}
+
+/* ---------------------------------------- */
+/*                   HEADER                 */
+/* ---------------------------------------- */
+header {
+    background-image: url(/Images/BannerBackground.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    height: auto;
+    padding-bottom: 30px;
+}
+
+/* Main Nav */
+header .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1% 2%; 
+}
+
+header .top .left {
+    display: flex;
+    height: 20%;
+    align-items: center;
+    gap: 10px;
+}
+
+header .top .left .menu-btn {
+    display: none;
+    color: var(--white);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+header .top .left .menu-btn i:hover {
+    color: var(--yellow);
+}
+
+header .top .left .menu-btn i,
+.close-btn i {
+    font-size: 1.8rem;
+}
+
+header .top .left img {
+    margin-right: 20px;
+}
+
+header .top a {
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: var(--white);
+    padding: 15px;
+}
+
+header .top .right {
+    display: flex;
+    align-items: center;
+    height: 20%;
+}
+
+header .top .right #accBtn {
+    text-decoration: underline;
+    color: var(--red-soft);
+}
+
+header .top a:hover {
+    color: var(--yellow);
+}
+
+/* Sidebar */
+header .sideBar {
+    background-color: var(--black);
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    box-shadow: 2px 0 var(--gray-151-315);
+    padding: 40px 0;
+    z-index: 999;
+}
+
+header .sideBar .close-btn {
+    background: transparent;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    margin: 0 20px 20px;
+}
+
+header .sideBar .close-btn i {
+    color: var(--white);
+}
+
+header .sideBar a {
+    font-size: 1rem;
+    padding: 15px 30px;
+    color: var(--white);
+    text-decoration: none;
+}
+
+header .sideBar a:hover {
+    color: var(--yellow);
+    background-color: var(--gray-155-836);
+}
+
+header .sideBar .close-btn i:hover {
+    color: var(--red-strong);
+}
+
+/* Bottom Part */
+header .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    margin: 0 18%;
+}
+
+header .bottom h1 {
+    font-size: 5rem;
+}
+
+header .bottom img {
+    width: 400px;
+}
+
+header .bottom {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideIn 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------------------------------------- */
+/*                   MAIN                   */
+/* ---------------------------------------- */
+
+.homeMain {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.homeMain .mainBanner {
+    background: url(/Images/MainBanner.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.homeMain .mainBanner .mainText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    translate: 0% -20%;
+}
+
+.homeMain .mainBanner .mainText h1 {
+    text-align: center;
+    color: var(--banner-title);
+    font-size: 4rem;
+}
+
+.homeMain .mainBanner .mainText p {
+    text-align: center;
+    max-width: 500px;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.homeMain .mainBanner .mainText a {
+    font-size: 2rem;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--red);
+    background-color: var(--yellow);
+    border-radius: 50px;
+}
+
+.homeMain .mainBanner .mainText a:hover {
+    box-shadow: 0 0 3px var(--yellow-dark), 0 0 15px var(--yellow-dark), 0 0 20px var(--yellow-dark);
+    transform: translateY(-2px);
+}
+
+.homeMain .slides {
+    max-height: 900px;
+    display: flex;
+    anchor-name: --slideshow;
+}
+
+.homeMain .slides .slide {
+    width: 100%;
+}
+
+.homeMain .slides img {
+    display: none;
+}
+
+.homeMain .slides img.active {
+    display: block;
+}
+
+.homeMain .slideshow button {
+    color: var(--white);
+    font-size: 2.5rem;
+    padding: 15px 30px;
+    border-radius: 5px;
+    position: fixed;
+    cursor: pointer;
+    background-color: var(--black-light);
+    border: none;
+    position-anchor: --slideshow;
+}
+
+.homeMain .slideshow .next:hover {
+    background: linear-gradient(90deg, var(--lg-light), var(--lg-mid));
+}
+
+.homeMain .slideshow .prev:hover {
+    background: linear-gradient(-90deg, var(--lg-light), var(--lg-mid));
+}
+
+.homeMain .slideshow .prev {
+    position-area: left center;
+    translate: 140%;
+}
+
+.homeMain .slideshow .next {
+    position-area: right center;
+    translate: -140%;
+}
+
+/* ---------------------------------------- */
+/*                PRODUCTS PAGES            */
+/* ---------------------------------------- */
+
+.productsMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    gap: 40px;
+}
+
+/* Sort and Search */
+.productsMain .SandS {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.productsMain .SandS label {
+    font-size: 1.3rem;
+    color: var(--white);
+    padding: 10px;
+    margin-right: 15px;
+}
+
+.productsMain .SandS #sort {
+    background: transparent;
+    font-size: 1rem;
+    padding: 8px;
+    color: var(--white);
+    border: 2px solid var(--white);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.productsMain .SandS option {
+    background-color: var(--black);
+}
+
+.productsMain .SandS .searchBar {
+    background-color: var(--white);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    height: auto;
+}
+
+.productsMain .SandS input {
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    padding-left: 5px;
+}
+
+.productsMain .SandS input:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.productsMain .SandS button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.productsMain .SandS button:hover {
+    background-color: rgba(0, 0, 0, 0.199);
+}
+
+/* Products Area */
+.productsMain .products {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    padding: 0 20px;
+    gap: 20px;
+    width: 100%;
+    max-width: 1370px;
+}
+
+.productsMain .active {
+    display: grid;
+}
+
+.productsMain .products .prod {
+    background-color: var(--card-bg);
+    border: 2px solid var(--black-52);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: auto;
+    max-width: 430px;
+    padding: 25px;
+    transition: transform 0.2s ease;
+}
+
+.productsMain .products .prod:hover {
+    transform: scale(1.05);
+    border: 2px solid rgba(230, 18, 18, 0.918); /* kept as-is because it's a specific rgba */
+}
+
+.productsMain .products img {
+    margin-bottom: 30px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.productsMain .products .productName {
+    font-size: 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    color: var(--white);
+}
+
+.productsMain .products .productPrice {
+    font-size: 1.1rem;
+    color: var(--red-light);
+    margin-bottom: 30px;
+}
+
+.productsMain .products .addtoCart {
+    margin: 5px 0;
+    padding: 10px 0px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 2px solid var(--black);
+    background-color: var(--yellow-dark);
+    border-radius: 20px;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.productsMain .products .addtoCart:hover {
+    box-shadow: 0 0 3px var(--yellow-dark), 0 0 15px var(--yellow-dark), 0 0 20px var(--yellow-dark);
+    transform: translateY(-2px);
+}
+
+/* Pagination Area */
+.productsMain .pagination,
+.productsMain .pagination .pageButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.productsMain .pagination button {
+    width: 35px;
+    height: 35px;
+    background-color: var(--gray-3d, var(--gray-4d)); /* fallback to --gray-4d */
+    color: var(--white);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.productsMain .pagination button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.productsMain .pagination .active {
+    align-items: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--yellow);
+}
+
+.productsMain .pagination button:hover:enabled {
+    background-color: var(--card-bg);
+}
+
+/* ---------------------------------------- */
+/*                   FOOTER                 */
+/* ---------------------------------------- */
+
+footer {
+    margin-top: 50px;
+    padding: 0px;
+    background-color: var(--black-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50px;
+    height: auto;
+}
+
+footer img {
+    width: 150px;
+    margin-top: 20px;
+}
+
+footer .socials {
+    display: flex;
+    gap: 15px;
+}
+
+footer svg {
+    width: 20px;
+    height: 20px;
+}
+
+footer .socials a {
+    background-color: var(--white);
+    display: flex;
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid var(--yellow-dark);
+}
+
+footer .socials a:hover {
+    background-color: var(--yellow-dark);
+}
+
+footer .about {
+    display: flex;
+    gap: 20px;
+}
+
+footer .about a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+footer .about a:hover {
+    color: var(--yellow-dark);
+}
+
+footer p {
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--gray-4d);
+    padding: 5px;
+}
+
+/* ---------------------------------------- */
+/*                 CART WEBPAGE             */
+/* ---------------------------------------- */
+/* Cart */
+.cartWeb {
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    background-color: var(--white);
+    height: auto;
+}
+
+.cartArea {
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    gap: 5px;
+}
+
+.cartArea .cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 5px;
+    border: 2px solid var(--black);
+    padding: 10px 5px;
+    min-height: 95vh;
+}
+
+.cartArea .cart h1 {
+    font-size: 3rem;
+    border-bottom: 2px solid var(--gray-4d);
+}
+
+.cartArea .cart .subtitles {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 50px;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+.cartArea .cart .subtitles h3 {
+    border-bottom: 1px solid var(--gray-4d);
+}
+
+.cartArea .cart .products .prod {
+    margin-bottom: 5px;
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 50px;
+    justify-items: center;
+    align-items: center;
+    border: 2px solid;
+    height: auto;
+    min-height: 100px;
+    max-height: 117px;
+}
+
+.cartArea .cart .products .prod img {
+    width: 150px;
+}
+
+.cartArea .cart .products .prod .productDetail {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.cartArea .cart .products .prod .prodName {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.cartArea .cart .products .prod .quantitybox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+}
+
+.cartArea .cart .products .prod .quantitybtn {
+    color: var(--black);
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.cartArea .cart .products .prod .quantitybtn:hover {
+    color: var(--yellow-dark);
+}
+
+.cartArea .cart .products .prod .quantitybox input {
+    width: 35px;
+    text-align: center;
+    border: 1px solid var(--black);
+    font-size: 1rem;
+}
+
+.cartArea .cart .products .prod .deleteOrder {
+    color: var(--black);
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cartArea .cart .products .prod .deleteOrder:hover {
+    color: var(--yellow-dark);
+}
+
+/* Payment */
+.cartArea .payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--white);
+    height: 500px;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid var(--black);
+}
+
+.cartArea .payment .top {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cartArea .payment .top h2 {
+    font-size: 2rem;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gray-4d);
+}
+
+.cartArea .payment .row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-4d);
+    padding-bottom: 5px;
+}
+
+.cartArea .payment .bottom .total {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.cartArea .payment .bottom .totalAmount {
+    font-size: 1.3rem;
+    color: var(--yellow);
+    font-weight: bold;
+}
+
+.cartArea .payment .bottom .checkout {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    color: var(--black);
+    background-color: var(--yellow);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cartArea .payment .bottom .checkout:hover {
+    box-shadow: 0 0 3px var(--yellow-dark), 0 0 15px var(--yellow-dark), 0 0 20px var(--yellow-dark);
+    transform: translateY(-2px);
+}
+
+.cartArea .payment .bottom .back {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--black);
+}
+
+.cartArea .payment .bottom .back:hover {
+    color: var(--yellow-dark);
+}
+
+/* ---------------------------------------- */
+/*               ACCOUNT PAGES              */
+/* ---------------------------------------- */
+.accountHeader,
+.loginHeader {
+    background: url(Images/BannerBackground.png);
+    padding-bottom: 0;
+}
+
+.accountMain {
+    margin: 5% 10%;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    gap: 30px;
+    height: 60vh;
+}
+
+.accountMain .aside {
+    background-color: var(--dark-1f);
+    border: 1px solid var(--red-strong);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.accountMain .aside h3 {
+    font-size: 1.5rem;
+    padding: 30px 20px;
+    color: var(--gray-979);
+}
+
+.accountMain .aside a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--white);
+    width: 100%;
+    padding: 20px 20px;
+    cursor: pointer;
+}
+
+.accountMain .aside a:not(:last-child):hover {
+    background-color: var(--black);
+}
+
+.accountMain .aside .signOut {
+    color: var(--red);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.accountMain .aside .signOut:hover {
+    color: var(--red-hover);
+}
+
+.accountMain h1 {
+    color: var(--gray-979);
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.accountMain p {
+    color: var(--white);
+    margin-bottom: 30px;
+}
+
+/* My Profile */
+.accountMain .profile {
+    display: none;
+    width: auto;
+    background-color: var(--dark-1f);
+    border: 1px solid var(--red-strong);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.accountMain .profile label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--gray-ccc);
+}
+
+.accountMain .profile input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: var(--dark-1b);
+    border: 1px solid var(--gray-333);
+    border-radius: 6px;
+    color: var(--white);
+    margin-bottom: 25px;
+}
+
+.accountMain .profile .name-fields {
+    display: flex;
+    gap: 20px;
+}
+
+.accountMain .profile .field {
+    flex: 1;
+}
+
+/* My Address */
+.accountMain .address {
+    display: none;
+    width: auto;
+    background-color: var(--dark-1f);
+    border: 1px solid var(--red-strong);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.accountMain .address .add h2 {
+    font-size: 2rem;
+    color: var(--white);
+    padding-bottom: 30px;
+    width: 100%;
+    border-bottom: 2px solid var(--gray-979);
+}
+
+.accountMain .address .add p {
+    margin: 10px 0;
+}
+
+.accountMain .address .actions {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 10px;
+}
+
+.accountMain .address .actions button {
+    color: var(--red-strong);
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.accountMain .address .actions button:hover {
+    color: var(--red-soft);
+}
+
+/* My Order */
+.accountMain .order {
+    display: none;
+    min-height: 300px;
+    width: auto;
+    background-color: var(--dark-1f);
+    border: 1px solid var(--red-strong);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.accountMain .order .empty {
+    width: 100%;
+    height: 90%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--card-inner-bg);
+    gap: 30px;
+}
+
+.accountMain .order .empty svg {
+    width: 50px;
+}
+
+.accountMain .order .empty p {
+    margin-bottom: 0;
+}
+
+.accountMain .order .empty a {
+    color: var(--red);
+    padding: 10px;
+    border-radius: 50px;
+    background-color: var(--yellow);
+    text-decoration: none;
+}
+
+.accountMain .order .empty a:hover {
+    box-shadow: 0 0 3px var(--yellow-dark), 0 0 15px var(--yellow-dark), 0 0 20px var(--yellow-dark);
+    transform: translateY(-2px);
+}
+
+/* Manage Account */
+.accountMain .manage {
+    display: none;
+    width: auto;
+    justify-content: space-between;
+    background-color: var(--dark-1f);
+    border: 1px solid var(--red-strong);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.accountMain .manage div {
+    margin-bottom: 10px;
+    padding: 25px;
+    width: 100%;
+    background-color: var(--card-inner-bg);
+}
+
+.accountMain .manage div h2 {
+    margin: 0;
+    color: var(--white);
+}
+
+.accountMain .manage .password a {
+    color: var(--red);
+}
+
+.accountMain .aside .active {
+    background-color: var(--black);
+}
+
+.accountMain .active {
+    display: block;
+}
+
+/* ---------------------------------------- */
+/*                 ADMIN PAGE               */
+/* ---------------------------------------- */
+.adminMain {
+    width: 100%;
+    height: 70vh;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 50px;
+}
+
+.adminMain .adminNav {
+    display: flex;
+    background-color: var(--dark-49);
+    border: 2px solid var(--red-strong);
+    padding: 5px;
+    gap: 10px;
+}
+
+
+.adminMain .adminNav #adminBtn {
+    text-align: center;
+    font-size: 1.2rem;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.adminMain .adminNav #logoutBtn {
+    text-align: center;
+    font-size: 1.2rem;
+    background: transparent;
+    border: none;
+    color: var(--red-light);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.adminMain .adminNav #adminBtn:hover {
+    color: var(--yellow);
+}
+
+/* ADD PRODUCT */
+.adminMain .addProduct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border: 2px solid var(--red-strong);
+    width: 500px;
+    height: auto;
+}
+
+.adminMain .addProduct form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.adminMain .addProduct form h2 {
+    font-size: 2rem;
+    color: var(--red-strong);
+}
+
+.adminMain .addProduct form div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.adminMain .addProduct form div label {
+    color: var(--white);
+}
+
+.adminMain .addProduct form div #productName,
+#productPrice,
+#productCategory {
+    color: var(--white);
+    font-weight: bold;
+    padding: 5px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid var(--red-soft);
+    background-color: var(--card-bg);
+}
+
+.adminMain .addProduct form div #productName,
+#productPrice,
+#productCategory:focus {
+    outline: none;
+}
+
+.adminMain .addProduct form #imageInput {
+    justify-content: center;
+    align-items: center;
+}
+.adminMain .addProduct form #imageInput label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.adminMain .addProduct form #imageInput #imageArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+    outline: 2px dashed var(--red-soft);
+    background: transparent;
+}
+
+.adminMain .addProduct form #addBtn {
+    color: var(--black);
+    font-weight: bold;
+    font-size: 1rem;
+    background: var(--red);
+    border: none;
+    outline: 2px solid var(--black);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* DELETE PRODUCT */
+.adminMain .delProduct {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    border: 2px solid var(--red-strong);
+    width: 500px;
+    height: auto;
+}
+
+.adminMain .delProduct form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.adminMain .delProduct form h2 {
+    font-size: 2rem;
+    color: var(--red-strong);
+}
+
+.adminMain .delProduct form label {
+    color: var(--white);
+}
+
+.adminMain .delProduct form select {
+    color: var(--white);
+    font-weight: bold;
+    padding: 5px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid var(--red-soft);
+    background-color: var(--card-bg);
+}
+
+.adminMain .delProduct form select:focus {
+    outline: none;
+}
+
+.adminMain .delProduct #delProductDisplay img {
+    margin-bottom: 30px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.adminMain .delProduct #delProductDisplay .productName {
+    font-size: 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    color: var(--white);
+}
+
+.adminMain .delProduct #delProductDisplay p {
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 5px;
+}
+
+
+.adminMain .delProduct form #delBtn {
+    color: var(--black);
+    font-weight: bold;
+    font-size: 1rem;
+    background: var(--red);
+    border: none;
+    outline: 2px solid var(--black);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+
+/* ---------------------------------------- */
+/*                 LOGIN PAGE               */
+/* ---------------------------------------- */
+.loginMain {
+    width: 100%;
+    height: 70vh;
+    max-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login */
+.loginBox {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--login-bg);
+    border: 1px solid var(--red-strong);
+    padding: 20px;
+    border-radius: 10px;
+    width: 700px;
+    margin: 0 auto;
+}
+
+.loginBox h2 {
+    color: var(--red-strong);
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.loginBox hr {
+    border: none;
+    border-top: 1px solid var(--gray-333);
+    margin-bottom: 25px;
+}
+
+.loginBox label {
+    display: block;
+    color: var(--white);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.loginBox input {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--dark-1b);
+    border: 1px solid var(--gray-333);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 25px;
+}
+
+.loginBox .btn {
+    padding: 10px 20px;
+    border: 1px solid var(--red-strong);
+    background: transparent;
+    margin-top: 10px;
+    color: var(--red-strong);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.loginBox a {
+    font-size: 14px;
+    color: var(--gray-ccc);
+    text-decoration: none;
+}
+
+.loginBox a:hover {
+    text-decoration: underline;
+}
+
+.loginBox #error {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 18px;
+    color: var(--red-strong);
+}
+
+.loginBox p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--gray-ccc);
+}
+
+.loginBox .signupbtn {
+    color: var(--red-strong);
+    cursor: pointer;
+}
+
+/* ---------------------------------------- */
+/*                 SIGNUP PAGE               */
+/* ---------------------------------------- */
+.signupMain {
+    width: 100%;
+    height: 70vh;
+    max-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signupBox {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--login-bg);
+    border: 1px solid var(--red-strong);
+    padding: 20px;
+    border-radius: 10px;
+    width: 700px;
+    height: auto;
+    margin: 0 auto 0;
+}
+
+.signupBox h2 {
+    color: var(--red-strong);
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.signupBox hr {
+    border: none;
+    border-top: 1px solid var(--gray-333);
+    margin-bottom: 25px;
+}
+
+.signupBox .fullname {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 10px;
+}
+
+.signupBox label {
+    display: block;
+    color: var(--white);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.signupBox input {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--dark-1b);
+    border: 1px solid var(--gray-333);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 25px;
+}
+
+.signupBox .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signupBox .btn {
+    padding: 10px 20px;
+    border: 1px solid var(--red-strong);
+    background: transparent;
+    color: var(--red-strong);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+}
+
+.signupBox a {
+    text-decoration: none;
+}
+
+.signupBox a:hover {
+    text-decoration: underline;
+}
+
+.signupBox p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--gray-ccc);
+}
+
+.signupBox .loginbtn {
+    color: var(--red-strong);
+    cursor: pointer;
+}
+
+/* ---------------------------------------- */
+/*                  ABOUT US                */
+/* ---------------------------------------- */
+
+.aboutMain {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 5% 7%;
+    border-radius: 20px;
+}
+
+.aboutMain div {
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 50px;
+    border: 2px solid var(--yellow-dark);
+    gap: 30px;
+}
+
+.aboutMain div:hover {
+    box-shadow: 0 0 3px var(--yellow-dark), 0 0 15px var(--yellow-dark), 0 0 20px var(--yellow-dark);
+    transform: translateY(-2px);
+}
+
+.aboutMain h2 {
+    font-size: 2rem;
+    color: var(--yellow);
+}
+
+.aboutMain p {
+    font-size: 1.2rem;
+    color: var(--white);
+}
+
+/* ---------------------------------------- */
+/*                CONTACT US                */
+/* ---------------------------------------- */
+
+.contactMain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.contactMain form {
+    width: 75%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--dark-1b);
+    border: 1px solid var(--yellow-dark);
+}
+
+.contactMain form h2 {
+    color: var(--yellow-dark);
+    grid-column: span 2;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.contactMain form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactMain form label {
+    color: var(--white);
+    font-size: 14px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.contactMain form input,
+textarea {
+    padding: 12px;
+    border: 1px solid var(--gray-ccc);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.contactMain form input,
+textarea:focus {
+    outline: none;
+}
+
+.contactMain form textarea.issueBox {
+    height: 200px;
+    resize: vertical;
+}
+
+.contactMain form .messageRow {
+    grid-column: span 2;
+}
+
+.contactMain form button {
+    grid-column: span 2;
+    padding: 12px 25px;
+    background: var(--dark-49);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 140px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.contactMain form button:hover {
+    opacity: 0.85;
+}
+
+/* ---------------------------------------- */
+/*               RESPONSIVENESS             */
+/* ---------------------------------------- */
+@media (max-width: 1140px) {
+    /* ---------- Header ---------- */
+    header .top {
+        justify-content: space-between;
+        padding: 15px 25px;
+    }
+
+    header .top .left img {
+        width: 100px;
+        height: 60px;
+        margin-right: 0;
+    }
+
+    header .top a {
+        font-size: 1.2rem;
+    }
+
+    header .bottom h1 {
+        font-size: 3.5rem;
+    }
+
+    header .bottom img {
+        width: 250px;
+    }
+
+    /* ---------- Main ---------- */
+    .homeMain .mainBanner .mainText {
+        translate: 0%;
+    }
+
+    .homeMain .mainBanner .mainText h1 {
+        font-size: 3rem;
+    }
+
+    .homeMain .mainBanner .mainText p {
+        font-size: 1.2rem;
+    }
+
+    .homeMain .mainBanner .mainText a {
+        font-size: 1.5rem;
+    }
+
+    /* Cart Webpage */
+    .cartArea {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+@media (max-width: 1000px) {
+    /* ---------- Header ---------- */
+    header .top {
+        justify-content: space-between;
+        padding: 15px 25px;
+    }
+
+    header .top .left img {
+        width: 80px;
+        height: 50px;
+        margin-right: 0;
+    }
+
+    header .top a {
+        font-size: 1.05rem;
+    }
+
+    header .bottom h1 {
+        font-size: 3rem;
+    }
+
+    header .bottom img {
+        width: 200px;
+    }
+
+    /* Account Webpage */
+    .accountMain {
+        margin: 1% 2%;
+        gap: 10px;
+        height: 80vh;
+    }
+
+    .accountMain .aside h3 {
+        font-size: 1rem;
+        padding: 20px 10px;
+    }
+
+    .accountMain .aside a {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 905px) {
+    /* ---------- Header ---------- */
+    header .top {
+        justify-content: space-between;
+        padding: 15px 25px;
+    }
+
+    header .top a {
+        font-size: 1.2rem;
+    }
+
+    header .top .left .menu-btn {
+        display: block;
+    }
+
+    header .top .left a:not(:first-of-type) {
+        display: none;
+    }
+
+    header .bottom {
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header .bottom h1 {
+        font-size: 2.5rem;
+    }
+
+    header .bottom img {
+        width: 300px;
+    }
+
+    /* ---------- Main ---------- */
+    .homeMain .slideshow .prev,
+    .homeMain .slideshow .next {
+        font-size: 1rem;
+    }
+
+    /* Products Pages */
+    /* Sort and Search */
+    .productsMain .SandS {
+        width: 90%;
+    }
+
+    .productsMain .SandS label {
+        font-size: 0.8rem;
+        margin: 1px;
+        padding: 2px;
+    }
+
+    .productsMain .SandS #sort {
+        font-size: 0.7rem;
+    }
+
+    .productsMain .SandS input {
+        font-size: 0.7rem;
+        width: 100%;
+    }
+
+    .productsMain .SandS button {
+        padding: 0;
+    }
+    
+    /* Products Area */
+    .productsMain .products {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    /* Cart Webpage */
+    .cartArea .cart .subtitles h3 {
+        font-size: 1rem;
+    }
+
+    .cartWeb .cartArea .cart .products .prod h3 {
+        font-size: 1rem;
+    }
+
+    .cartArea .cart .products .prod img {
+        width: 100px;
+        height: 70px;
+    }
+
+    /* Account Webpage */
+    .accountMain {
+        margin: 1% 2%;
+        gap: 10px;
+        height: 80vh;
+    }
+
+    .accountMain .aside h3 {
+        font-size: 1rem;
+        padding: 20px 10px;
+    }
+
+    .accountMain .aside a {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    /* ------- Main ------- */
+    .homeMain .slideshow button {
+        display: none;
+    }
+
+    /* Account Webpage */
+    .accountMain {
+        display: flex;
+        flex-direction: column;
+        margin: 1% 2%;
+        gap: 10px;
+        height: auto;
+    }
+
+    .accountMain .aside h3 {
+        font-size: 1.1rem;
+        padding: 20px 10px;
+    }
+
+    .accountMain .aside a {
+        font-size: 1rem;
+        padding: 15px 15px;
+    }
+
+    /* Contact Webpage */
+    .contactMain form {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contactMain form button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    /* ---------- Header ---------- */
+    header .top {
+        justify-content: space-between;
+        padding: 15px 15px;
+    }
+
+    header .top a {
+        font-size: 1.1rem;
+    }
+
+    header .bottom {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    header .bottom h1 {
+        font-size: 1.5rem;
+    }
+
+    header .bottom img {
+        width: 200px;
+    }
+
+    /* ---------- Main ---------- */
+    .homeMain .slideshow button {
+        display: none;
+    }
+
+    /* Products Pages */
+    .productsMain .SandS label {
+        font-size: 0.6rem;
+        padding: 1px;
+        margin-right: 2px;
+    }
+
+    .productsMain .SandS #sort {
+        font-size: 0.5rem;
+    }
+
+    .productsMain .SandS input {
+        font-size: 0.5rem;
+        width: 100%;
+    }
+
+    .productsMain .SandS button i {
+        font-size: 0.9rem;
+    }
+
+    /* Cart Webpage */
+    .cartArea .cart h1 {
+        font-size: 2rem;
+    }
+
+    .cartArea .cart .subtitles h3 {
+        font-size: 0.6rem;
+    }
+
+    .cartWeb .cartArea .cart .products .prod h3 {
+        font-size: 0.55rem;
+    }
+
+    .cartArea .cart .products .prod img {
+        width: 60px;
+        height: 40px;
+    }
+
+    .cartArea .cart .products .prod .quantitybox {
+        width: auto;
+        height: 25px;
+    }
+
+    .cartArea .cart .products .prod .quantitybtn {
+        margin: 0 5px;
+    }
+
+    .cartArea .cart .products .prod .quantitybox input {
+        width: 18px;
+        font-size: 0.55rem;
+    }
+
+    .cartArea .cart .products .prod .deleteOrder {
+        font-size: 0.7rem;
+    }
+}

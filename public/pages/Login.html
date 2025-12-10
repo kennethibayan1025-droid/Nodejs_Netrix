@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Images/Netrix Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Images/Netrix Logo.png">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Netrix - Badminton Centre</title>
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <div class="sideBar">
+            <button class="close-btn" onclick="closeSidebar()"><i class="material-icons">close</i></button>
+            <a href="/rackets">Rackets</a>
+            <a href="/grips">Grips</a>
+            <a href="/shuttlecocks">Shuttlecocks</a>
+            <a href="/shoes">Shoes</a>
+            <a href="/bags">Bags</a>
+            <a href="/jerseys">Jerseys</a>
+        </div>
+
+        <div class="top">
+            <div class="left">
+                <button class="menu-btn" onclick="showSidebar()"><i class="material-icons">menu</i></button>
+                <a href="/"><img src="/Images/Netrix Logo.png" alt="" width="120px" height="70px"></a>
+                <a href="/rackets">Rackets</a>
+                <a href="/grips">Grips</a>
+                <a href="/shuttlecocks">Shuttlecocks</a>
+                <a href="/shoes">Shoes</a>
+                <a href="/bags">Bags</a>
+                <a href="/jerseys">Jerseys</a>
+            </div>
+            <div class="right">
+                <a href="/cart">Cart</a>
+                <a href="/login" id="accBtn">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="loginMain">
+        <form class="loginBox" action="/auth/login" method="POST" enctype="application/x-www-form-urlencoded">
+            <h2>Login</h2>
+            <hr>
+
+            <label>Email Address</label>
+            <input type="text" name="email" id="email" placeholder="Enter email address" required>
+
+            <label>Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required autocomplete="off">
+
+            <a href="#">Forgot your password?</a>
+            <button class="btn" type="submit">Login</button>
+            <p id="error"></p>
+            <p>Don't have an account? <a class="signupbtn" href="/signup">Create account</a></p>
+        </form>
+    </main>
+
+    <script src="../scripts/functions.js"></script>
+    <script src="../scripts/main.js"></script>
+</body>
+</html>
