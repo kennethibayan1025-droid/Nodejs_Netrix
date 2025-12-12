@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Images/Netrix Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Images/Netrix Logo.png">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Netrix - Badminton Centre</title>
+</head>
+<body>
+    <main class="addressMain">
+        <form class="addressForm">
+            <h2>Edit Address</h2>
+
+            <label>Region</label>
+            <select id="region" name="region">
+                <option value="" disabled selected>Select Region</option>
+            </select>
+
+            <label>Province</label>
+            <select id="province" name="province" disabled>
+                <option value="" disabled selected>Select Province</option>
+            </select>
+
+            <label>City / Municipality</label>
+            <select id="city" name="city" disabled>
+                <option value="" disabled selected>Select City</option>
+            </select>
+
+            <label>Barangay</label>
+            <select id="barangay" name="barangay" disabled>
+                <option value="" disabled selected>Select Barangay</option>
+            </select>
+
+            <label>House no., Street</label>
+            <input type="text" name="street" id="street" placeholder="Enter your house no. and street">
+
+            <button type="submit" id="saveAddBtn">Save Address</button>
+            <a href="/account" id="cancelBtn"> ◄ Cancel</a>
+        </form>
+    </main>
+
+    <script src="../scripts/functions.js"></script>
+</body>
+</html>

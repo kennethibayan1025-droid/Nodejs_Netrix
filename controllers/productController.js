@@ -1,4 +1,4 @@
-const { dbAll, dbRun, dbGet } = require("../database");
+const { dbAll, dbGet } = require("../database");
 
 /* =============================
    GET ALL PRODUCT

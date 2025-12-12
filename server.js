@@ -105,6 +105,14 @@ app.get("/account", isLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, "public/pages/Account.html"));
 });
 
+app.get("/address", isLoggedIn, (req, res) => {
+    if (!req.session.user){
+        res.redirect('/login');
+    }
+    res.sendFile(path.join(__dirname, "public/pages/Address.html"));
+});
+
+
 /* ABOUT PAGE */
 app.get("/about", isLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, "public/pages/About.html"));
@@ -133,7 +141,8 @@ app.get("/admin", isAdmin, (req, res) => {
 app.use("/products", require("./routes/productRoute"));
 app.use("/addDel", require("./routes/adminRoute"));
 app.use("/auth", require("./routes/authRoute"));
-
+app.use("/api/location", require("./routes/locationRoute"));
+app.use("/api/address", require("./routes/addressRoute"));
 
 
 

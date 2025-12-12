@@ -1,6 +1,8 @@
 /* ============================================================
    SESSION (DISPLAY LOGGED IN USER)
 ============================================================ */
+
+
 /* NAV BAR */
 const navRight = document.querySelector('.right');
 
@@ -22,6 +24,7 @@ function displayUsername(user){
 
 /* PROFILE PAGE */
 const emailDisplay = document.getElementById('emailDisplay');
+const emailDisplayP = document.getElementById('emailDisplayP');
 const firstnameDisplay = document.getElementById('firstnameDisplay');
 const lastnameDisplay = document.getElementById('lastnameDisplay');
 
@@ -31,6 +34,7 @@ function displayProfile(user){
     const names = user.data.fullname.split(" ");
 
     emailDisplay.value = user.data.email;
+    emailDisplayP.textContent = user.data.email;
     firstnameDisplay.value = names[0];
     lastnameDisplay.value = names[1];
 }
@@ -216,11 +220,12 @@ function displayOnSelect(products) {
     adminSelectContainer.innerHTML = `<option value="" disabled selected>--- Select a product to delete ---</option>`;
 
     products.forEach(product => {
-        const option = document.createElement('option');
-        option.value = product.product_id;
-        option.textContent = `${product.product_name}, ${product.category}, (ID: ${product.product_id})`;
+        adminSelectContainer.innerHTML += `<option value="${product.product_id}">${product.product_name}, ${product.category}, (ID: ${product.product_id})</option>`;
+        // const option = document.createElement('option');
+        // option.value = product.product_id;
+        // option.textContent = `${product.product_name}, ${product.category}, (ID: ${product.product_id})`;
 
-        adminSelectContainer.appendChild(option);
+        // adminSelectContainer.appendChild(option);
     });
 }
 
@@ -254,5 +259,172 @@ if (adminSelectContainer){
         catch (err){
             console.error(err);
         }
+    });
+}
+
+
+/* ============================================================
+   FUNCTIONS FOR DISPLAYING LOCATIONS
+============================================================ */
+const addressForm = document.querySelector('.addressForm');
+const regionSelect = document.getElementById("region");
+const provinceSelect = document.getElementById("province");
+const citySelect = document.getElementById("city");
+const barangaySelect = document.getElementById("barangay");
+const streetInput = document.getElementById('street');
+
+if (addressForm){
+    // Fetch helper
+    async function fetchData(url) {
+        const res = await fetch(url);
+        return res.json();
+    }
+
+    // Load Regions on page load
+    async function loadRegions() {
+        regionSelect.innerHTML = `<option value="" disabled selected>Select Region</option>`;
+        const regions = await fetchData("/api/location/regions");
+
+        console.log(regions);
+        regions.forEach(r => {
+            regionSelect.innerHTML += `<option value="${r.code}">${r.regionName}</option>`;
+        });
+    }
+
+    regionSelect.addEventListener("change", async () => {
+        const regionCode = regionSelect.value;
+
+        provinceSelect.disabled = true;
+        citySelect.disabled = true;
+        barangaySelect.disabled = true;
+
+        provinceSelect.innerHTML = `<option value="">Loading...</option>`;
+        citySelect.innerHTML = `<option value="">Select City</option>`;
+        barangaySelect.innerHTML = `<option value="">Select Barangay</option>`;
+
+        if (!regionCode) return;
+
+        const provinces = await fetchData(`/api/location/provinces/${regionCode}`);
+
+        console.log(provinces);
+        // --------------------------------------
+        // 🚨 NCR FIX: If no provinces → skip province dropdown
+        // --------------------------------------
+        if (provinces.length === 0) {
+            provinceSelect.innerHTML = `<option value="">No Provinces (NCR)</option>`;
+            provinceSelect.disabled = true; // lock it
+
+            // Directly load cities of the region
+            const cities = await fetchData(`/api/location/cities/${regionCode}`);
+
+            citySelect.disabled = false;
+            citySelect.innerHTML = `<option value="" disabled selected>Select City/Municipality</option>`;
+            cities.forEach(c => {
+                citySelect.innerHTML += `<option value="${c.code}">${c.name}</option>`;
+            });
+
+            return;
+        }
+
+        // Normal behavior for other regions
+        provinceSelect.disabled = false;
+        provinceSelect.innerHTML = `<option value="">Select Province</option>`;
+        provinces.forEach(p => {
+            provinceSelect.innerHTML += `<option value="${p.code}">${p.name}</option>`;
+        });
+    });
+
+    provinceSelect.addEventListener("change", async () => {
+        const provinceCode = provinceSelect.value;
+
+        citySelect.disabled = true;
+        barangaySelect.disabled = true;
+
+        citySelect.innerHTML = `<option value="">Loading...</option>`;
+        barangaySelect.innerHTML = `<option value="">Select Barangay</option>`;
+
+        if (!provinceCode) return;
+
+        const cities = await fetchData(`/api/location/cities/${provinceCode}`);
+
+        console.log(cities);
+        citySelect.disabled = false;
+        citySelect.innerHTML = `<option value="" disabled selected>Select City/Municipality</option>`;
+        cities.forEach(c => {
+            citySelect.innerHTML += `<option value="${c.code}">${c.name}</option>`;
+        });
+    });
+
+    citySelect.addEventListener("change", async () => {
+        const cityCode = citySelect.value;
+
+        barangaySelect.disabled = true;
+        barangaySelect.innerHTML = `<option value="">Loading...</option>`;
+
+        if (!cityCode) return;
+
+        const barangays = await fetchData(`/api/location/barangays/${cityCode}`);
+
+        console.log(barangays);
+        barangaySelect.disabled = false;
+        barangaySelect.innerHTML = `<option value="" disabled selected>Select Barangay</option>`;
+        barangays.forEach(b => {
+            barangaySelect.innerHTML += `<option value="${b.code}">${b.name}</option>`;
+        });
+    });
+
+    // Initial load
+    loadRegions();
+}
+
+
+/* ============================================================
+   FUNCTIONS FOR SAVING ADDRESS
+============================================================ */
+if (addressForm){
+    addressForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const user_id = document.body.className;
+
+        if (!user_id) {
+            console.log("You are not logged in.");
+            return;
+        }
+
+        const region = regionSelect.options[regionSelect.selectedIndex].text;
+
+        let province = provinceSelect.options[provinceSelect.selectedIndex]?.text || null;
+        if (provinceSelect.value === "") {
+            province = null;
+        }
+
+        const city = citySelect.options[citySelect.selectedIndex].text;
+
+        const barangay = barangaySelect.options[barangaySelect.selectedIndex].text;
+
+        const street = streetInput.value;
+
+        const payload = {
+            user_id,
+            region,
+            province,
+            city,
+            barangay,
+            street
+        };
+
+        const res = await fetch("/api/address/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        alert(data.message);
+
+        setTimeout(()=> {
+            window.location.href = "/address";
+        }, 500)
     });
 }
