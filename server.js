@@ -65,7 +65,7 @@ app.get("/shuttlecocks", isLoggedIn, (req, res) => {
 });
 
 /* SHOES PAGE */
-app.get("/shoes", (req, res) => {
+app.get("/shoes", isLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, "public/pages/Shoes.html"));
 });
 

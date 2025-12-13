@@ -25,16 +25,16 @@ function displayUsername(user){
 /* PROFILE PAGE */
 const emailDisplay = document.getElementById('emailDisplay');
 const emailDisplayP = document.getElementById('emailDisplayP');
+const fullnameDisplay = document.getElementById('fullName');
 const firstnameDisplay = document.getElementById('firstnameDisplay');
 const lastnameDisplay = document.getElementById('lastnameDisplay');
 
 function displayProfile(user){
-    console.log(user);
-
     const names = user.data.fullname.split(" ");
 
     emailDisplay.value = user.data.email;
     emailDisplayP.textContent = user.data.email;
+    fullnameDisplay.textContent = user.data.fullname;
     firstnameDisplay.value = names[0];
     lastnameDisplay.value = names[1];
 }
@@ -58,6 +58,44 @@ async function getLoggedinUser() {
     }
 }
 getLoggedinUser();
+
+
+/* ADDRESS PAGE */
+async function loadUserAddress() {
+    try {
+        const res = await fetch("/api/address/get", {
+            method: "GET",
+            credentials: "include" // IMPORTANT for session
+        });
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+
+        // No address yet
+        if (!data.address) {
+            document.getElementById("region").textContent = "No address saved";
+            document.getElementById("city").textContent = "";
+            document.getElementById("barangay").textContent = "";
+            document.getElementById("street").textContent = "";
+            return;
+        }
+
+        const { region, city, barangay, street } = data.address;
+
+        document.getElementById("region").textContent = region || "";
+        document.getElementById("city").textContent = city || "";
+        document.getElementById("barangay").textContent = barangay || "";
+        document.getElementById("street").textContent = street || "";
+
+    } catch (err) {
+        console.error("Failed to load address:", err);
+    }
+}
+
+if (emailDisplay){
+    document.addEventListener("DOMContentLoaded", loadUserAddress);
+}
 
 /* ============================================================
    LOGOUT FUNCTION
@@ -385,12 +423,6 @@ if (addressForm){
     addressForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const user_id = document.body.className;
-
-        if (!user_id) {
-            console.log("You are not logged in.");
-            return;
-        }
 
         const region = regionSelect.options[regionSelect.selectedIndex].text;
 
@@ -406,7 +438,6 @@ if (addressForm){
         const street = streetInput.value;
 
         const payload = {
-            user_id,
             region,
             province,
             city,
