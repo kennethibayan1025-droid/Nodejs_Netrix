@@ -348,7 +348,7 @@ header .bottom {
 
 /* Sort and Search */
 .productsMain .SandS {
-    width: 70%;
+    width: min(95%, 1370px);
     display: flex;
     justify-content: space-between;
 }
@@ -441,7 +441,7 @@ header .bottom {
 
 .productsMain .products img {
     margin-bottom: 30px;
-    width: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: contain;
 }
 
@@ -1708,10 +1708,6 @@ textarea:focus {
 
     /* Products Pages */
     /* Sort and Search */
-    .productsMain .SandS {
-        width: 90%;
-    }
-
     .productsMain .SandS label {
         font-size: 0.8rem;
         margin: 1px;
@@ -1733,7 +1729,7 @@ textarea:focus {
     
     /* Products Area */
     .productsMain .products {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
     /* Cart Webpage */
