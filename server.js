@@ -112,6 +112,13 @@ app.get("/address", isLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, "public/pages/Address.html"));
 });
 
+app.get("/password", isLoggedIn, (req, res) => {
+    if (!req.session.user){
+        res.redirect('/login');
+    }
+    res.sendFile(path.join(__dirname, "public/pages/Password.html"));
+});
+
 
 /* ABOUT PAGE */
 app.get("/about", isLoggedIn, (req, res) => {

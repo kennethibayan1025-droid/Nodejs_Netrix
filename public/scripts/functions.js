@@ -1,8 +1,6 @@
 /* ============================================================
    SESSION (DISPLAY LOGGED IN USER)
 ============================================================ */
-
-
 /* NAV BAR */
 const navRight = document.querySelector('.right');
 
@@ -111,7 +109,6 @@ async function logout() {
 if (signoutBtn){
     signoutBtn.addEventListener('click', logout);
 }
-
 
 /* ============================================================
    FUNCTIONS FOR PRODUCTS DISPLAY

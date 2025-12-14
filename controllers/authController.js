@@ -125,7 +125,7 @@ exports.signup = async (req, res) => {
 
         // 2️⃣ Check if email exists
         if (await checkEmailExists(email)) {
-            res.redirect("/login?error=Email+already+exists");
+            res.redirect("/signup?error=Email+already+exists");
         }
 
         // 3️⃣ Hash password
@@ -142,6 +142,45 @@ exports.signup = async (req, res) => {
 
     } catch (err) {
         console.error("signup:", err);
+        return res.status(500).json({ error: "Server error" });
+    }
+};
+
+
+/* =============================
+   CHANGE PASSWORD
+============================= */
+exports.changePassword = async (req, res) => {
+    try {
+        const user_id = req.session.user?.id;
+        const userEmail = req.session.user?.email;
+
+        console.log(userEmail);
+        if (!userEmail) {
+            console.log("You are not logged in.");
+            return;
+        }
+
+        const { email, password } = req.body;
+
+        if (email !== userEmail) {
+            res.redirect("/password?error=Invalid+email");
+        }
+        console.log(email);
+
+        const hashedPassword = await hashPassword(password);
+
+        const sql = `
+        UPDATE users
+        SET password = ?
+        WHERE user_id = ?
+        `;
+
+        await dbRun(sql, [hashedPassword, user_id]);
+
+        res.redirect('/account');
+    } catch (err) {
+        console.error("password error:", err);
         return res.status(500).json({ error: "Server error" });
     }
 };
