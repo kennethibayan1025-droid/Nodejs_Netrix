@@ -1934,15 +1934,24 @@ textarea:focus {
     }
 
     .cartArea .cart .subtitles h3 {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
+    }
+
+    .cartWeb .cartArea .cart .cartProducts,
+    .cartArea .cart .subtitles {
+        width: 100%;
+    }
+
+    .cartWeb .cartArea .cart .cartProducts .prods .productDetail {
+        gap: 0;
     }
 
     .cartWeb .cartArea .cart .cartProducts .prods h3 {
-        font-size: 0.7rem;
+        font-size: 0.55rem;
     }
 
     .cartArea .cart .cartProducts .prods img {
-        height: 70px;
+        height: 60px;
     }
 
     .cartArea .cart .cartProducts .prods .quantitybox {
