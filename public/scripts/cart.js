@@ -37,7 +37,7 @@ async function displayCart() {
             </div>
             <div class="quantitybox">
                <button class="quantitybtn" onclick="updateCart(${item.cart_item_id}, -1)">−</button>
-               <input type="text" value="${item.quantity}">
+               <input type="text" value="${item.quantity}" disabled>
                <button class="quantitybtn" onclick="updateCart(${item.cart_item_id}, 1)">+</button>
             </div>
             <h3>${item.product_price.toLocaleString('en-PH', {style: "currency", currency: "PHP"})}</h3>
