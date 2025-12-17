@@ -172,8 +172,6 @@ async function fetchProduct(id) {
     }
 }
 
-
-
 // EVENT LISTENERS
 if (searchInput && sortSelect){
     searchInput.addEventListener("input", () => {
@@ -198,8 +196,8 @@ function displayProducts(products) {
         div.innerHTML = `
             <img src="/ImagesProd/${category}/${product.product_img}" alt="Product Image">
             <p class="productName">${product.product_name}</p>
-            <h3 class="productPrice">₱${product.product_price.toLocaleString('en-PH')}</h3>
-            <button class="addtoCart" value=${product.product_id}>Add to Cart</button>
+            <h3 class="productPrice">${product.product_price.toLocaleString('en-PH', {style: "currency", currency: "PHP"})}</h3>
+            <button class="addtoCart" data-product-id=${product.product_id}>Add to Cart</button>
         `;
 
         productsContainer.appendChild(div);
@@ -209,6 +207,25 @@ if (productsContainer) { // INITIAL DISPLAY
     fetchProducts();
 }
 
+/* ============================================================
+   FUNCTIONS FOR ADDING TO CART
+============================================================ */
+if (productsContainer) {
+    productsContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("addtoCart")) {
+        const productId = e.target.dataset.productId;
+        add(productId);
+    }
+    });
+}
+
+async function add(productId) {
+   fetch("/cart/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId })
+   });
+}
 
 /* ============================================================
    FUNCTIONS FOR ADDING PRODUCTS
