@@ -47,6 +47,8 @@
     /* ---------- Misc ---------- */
     --login-bg: #000000bd;
     --black-52: #00000052; /* semi-transparent black hex used for borders */
+    --green: #22af39;
+    --green-dark: rgb(51, 105, 58);
 
     /* ---------- Gradient helpers ---------- */
     --lg-light: rgba(218, 218, 218, 0.719);
@@ -627,6 +629,18 @@ footer p {
 
 .cartArea .cart .cartProducts {
     width: 90%;
+}
+
+.cartArea .cart .cartProducts .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 200px;
+}
+
+.cartArea .cart .cartProducts .empty h2 {
+    font-size: 3em;
 }
 
 .cartArea .cart .cartProducts .prods {
@@ -1648,6 +1662,54 @@ textarea:focus {
 .contactMain form button:hover {
     opacity: 0.85;
 }
+
+
+/* ---------------------------------------- */
+/*            TOASTS AND POPUPS             */
+/* ---------------------------------------- */
+.toastsContainer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    padding: 20px 0 20px 30px;
+    background: var(--green);
+    width: 300px;
+    border-radius: 0 10px 10px 0;
+
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+.toastsContainer span {
+    position: absolute;
+    transform: translateY(-100%) translateX(-50%);
+    font-size: 1.5em;
+    color: var(--white);
+    background-color: var(--green-dark);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.toastsContainer h2, p {
+    color: var(--white);
+}
+
+.toastsContainer.show {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+
+
 
 /* ---------------------------------------- */
 /*               RESPONSIVENESS             */

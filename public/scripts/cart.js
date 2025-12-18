@@ -22,6 +22,15 @@ async function displayCart() {
       const cartLength = cartItems.length;
       console.log(cartItems);
 
+      if (cartLength === 0) {
+         cartContainer.innerHTML = `
+         <div class="empty">
+            <h2>Cart is empty</h2>
+         </div>
+         `;
+      }
+
+
       let totalAmount = 0;
       const shipping = cartLength * 36;
 

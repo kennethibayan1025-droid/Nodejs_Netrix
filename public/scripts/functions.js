@@ -212,20 +212,54 @@ if (productsContainer) { // INITIAL DISPLAY
 ============================================================ */
 if (productsContainer) {
     productsContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("addtoCart")) {
-        const productId = e.target.dataset.productId;
-        add(productId);
-    }
+        if (e.target.classList.contains("addtoCart")) {
+            const productId = e.target.dataset.productId;
+            add(productId);
+        }
     });
 }
 
 async function add(productId) {
-   fetch("/cart/add", {
+    const res = await fetch("/cart/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ productId })
    });
+
+   if (res.ok) {
+    showCartToast()
+   }
 }
+
+
+const toast = document.querySelector(".toastsContainer");
+const clickSound = new Audio("/Sounds/Pop.mp3");
+
+let toastTimeout;
+function showCartToast() {
+    clearTimeout(toastTimeout);
+    
+    clickSound.currentTime = 0;
+    clickSound.volume = 0.25;
+    clickSound.play();
+
+    toast.classList.remove("show");
+    toast.innerHTML = "";
+    void toast.offsetHeight; // force reflow
+
+    toast.innerHTML = `
+        <span>✔</span>
+        <h2>Added to Cart</h2>
+        <p class="cartToast">An item is added to cart successfully!</p>
+    `;
+
+    toast.classList.add("show");
+
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500);
+}
+
 
 /* ============================================================
    FUNCTIONS FOR ADDING PRODUCTS
