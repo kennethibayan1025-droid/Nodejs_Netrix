@@ -9,7 +9,7 @@ if (cartContainer){
 }
 
 async function getCart() {
-   const res = await fetch("/cart/get");
+   const res = await fetch("/carts/get");
    const items = await res.json();
    return items;
 }
@@ -81,7 +81,7 @@ async function displayCart() {
                   <h3 class="total">Total</h3>
                   <h3 class="totalAmount">${TOTALF}</h3>
                </div>
-               <button class="checkout">Checkout</button>
+               <button class="checkout" onclick="checkout(${TOTAL})">Checkout</button>
                <a class="back" onclick="goBack()">&#8592 <span>Go Back Shopping</span></a>
          </div>
       `;
@@ -92,7 +92,7 @@ async function displayCart() {
 }
 
 async function updateCart(cartItemId, change) {
-   await fetch("/cart/update", {
+   await fetch("/carts/update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cartItemId, change })
@@ -103,11 +103,52 @@ async function updateCart(cartItemId, change) {
 
 
 async function removeItem(cartItemId) {
-   await fetch("/cart/remove", {
+   await fetch("/carts/remove", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cartItemId })
    });
 
    displayCart();
+}
+
+async function checkout(totalAmount) {
+   const res = await fetch("/carts/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ totalAmount })
+   });
+
+   if (res.ok) {
+      displayCart();
+      showCoutToast();
+   }
+}
+
+const toast = document.querySelector(".toastsContainer");
+const clickSound = new Audio("/Sounds/Pop.mp3");
+
+let toastTimeout;
+function showCoutToast() {
+    clearTimeout(toastTimeout);
+    
+    clickSound.currentTime = 0;
+    clickSound.volume = 0.25;
+    clickSound.play();
+
+    toast.classList.remove("show");
+    toast.innerHTML = "";
+    void toast.offsetHeight; // force reflow
+
+    toast.innerHTML = `
+        <span>✔</span>
+        <h2>Checkout Success!</h2>
+        <p class="cartToast">All items are succesfully checked out!</p>
+    `;
+
+    toast.classList.add("show");
+
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500);
 }

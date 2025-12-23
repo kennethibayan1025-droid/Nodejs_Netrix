@@ -220,7 +220,7 @@ if (productsContainer) {
 }
 
 async function add(productId) {
-    const res = await fetch("/cart/add", {
+    const res = await fetch("/carts/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ productId })
@@ -505,5 +505,72 @@ if (addressForm){
         setTimeout(()=> {
             window.location.href = "/address";
         }, 500)
+    });
+}
+
+
+/* ============================================================
+   FUNCTIONS FOR DISPLAYING ORDERS
+============================================================ */
+const orderContainer = document.querySelector('.order');
+
+async function fetchOrders() {
+    try {
+        const res = await fetch("/orders/get");
+        const data = await res.json();
+
+        console.log(data);
+
+        if (data.length === 0) {
+            orderContainer.innerHTML = `
+            <h1>My Orders</h1>
+
+            <div class="empty">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                    <path d="m19,22c0,1.105-.895,2-2,2s-2-.895-2-2,.895-2,2-2,2,.895,2,2Zm-12-2c-1.105,0-2,.895-2,2s.895,2,2,2,2-.895,2-2-.895-2-2-2Zm11.09-5H7.405c-.25,0-.463-.186-.495-.434l-.876-6.566h6.966v-3h-7.366l-.262-1.963c-.231-1.731-1.723-3.037-3.47-3.037H0v3h1.902c.25,0,.464.187.496.434l1.537,11.527c.23,1.732,1.722,3.039,3.47,3.039h12.966l1.939-7h-3.112l-1.108,4Zm5.884-12.853L21.853.026l-2.353,2.353L17.147.026l-2.121,2.121,2.353,2.353-2.353,2.353,2.121,2.121,2.353-2.353,2.353,2.353,2.121-2.121-2.353-2.353,2.353-2.353Z"/>
+                </svg>
+                <p>No Orders Yet.</p>
+                <a href="/rackets">Shop Now</a>
+            </div>
+            `;
+        } else {
+            displayOrders(data);
+        }
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+if (orderContainer) {
+    fetchOrders();
+}
+
+async function clearOrders() {
+    await fetch("/orders/clear", {
+        method: "POST"
+    });
+
+    await fetchOrders();
+}
+
+function displayOrders(products) {
+    orderContainer.innerHTML = `
+        <h1>My Orders</h1>
+        <button class="clear" onclick="clearOrders()">Clear Orders</button>
+        <div class="container"></div>`;
+
+    const opContainer = document.querySelector('.container');
+    products.forEach(product => {
+        const div = document.createElement('div');
+        div.className = 'orderProds';
+        div.innerHTML = `
+            <img class="prodImg" src="/ImagesProd/${product.category}/${product.product_img}" alt="Product Image">
+            <div id="prodDetails">
+                <p class="prodName">${product.product_name}</p>
+                <p class="prodPrice"><span class="prodAmount">${product.quantity}x</span>Total: ${product.subtotal.toLocaleString('en-PH', {style: "currency", currency: "PHP"})}</p>
+            </div>
+        `;
+
+        opContainer.appendChild(div);
     });
 }

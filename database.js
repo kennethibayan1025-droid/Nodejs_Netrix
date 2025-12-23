@@ -4,11 +4,12 @@ const path = require('path');
 
 const dbPath = path.resolve(__dirname, "database.db");
 const db = new sqlite3.Database(dbPath, (err) => {
-    if (err) {
-        console.error(err.message);
-    } else {
-        console.log('Connected to Database.');
-    }
+  if (err) {
+    console.error(err.message);
+  } else {
+    console.log("Connected to Database.");
+    db.run("PRAGMA foreign_keys = ON");
+  }
 });
 
 /* -------- FETCH MULTIPLE ROWS -------- */

@@ -150,7 +150,8 @@ app.use("/addDel", require("./routes/adminRoute"));
 app.use("/auth", require("./routes/authRoute"));
 app.use("/api/location", require("./routes/locationRoute"));
 app.use("/api/address", require("./routes/addressRoute"));
-app.use("/cart", require("./routes/cartRoute"));
+app.use("/carts", require("./routes/cartRoute"));
+app.use("/orders", require("./routes/orderRoute"));
 
 
 app.get("/profileData", (req, res) => {

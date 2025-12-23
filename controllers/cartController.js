@@ -197,3 +197,73 @@ exports.removeItem = async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 };
+
+
+exports.checkout = async (req, res) => {
+    try {
+        const userId = req.session.user?.id;
+        const { totalAmount } = req.body;
+
+        if (totalAmount === 0) {
+            return;
+        }
+
+        const cart = await dbGet(
+            "SELECT cart_id FROM carts WHERE user_id = ?",
+            [userId]
+        );
+
+        const orderResult = await dbRun(
+        "INSERT INTO orders (user_id, total_amount) VALUES (?, ?)",
+        [userId, totalAmount]
+        );
+
+        const orderId = orderResult.id;
+
+        await dbRun(
+        `INSERT INTO order_items (order_id, product_id, product_name, product_price, quantity)
+        SELECT
+            ?,
+            p.product_id,
+            p.product_name,
+            p.product_price,
+            ci.quantity
+        FROM cart_items ci
+        JOIN products p ON ci.product_id = p.product_id
+        WHERE ci.cart_id = ?`,
+        [orderId, cart.cart_id]
+        );
+
+        await dbRun(
+        `DELETE FROM cart_items WHERE cart_id = ?`,
+        [cart.cart_id]
+        );
+
+        await dbRun(`
+        INSERT INTO order_addresses (
+            order_id,
+            region,
+            province,
+            city,
+            barangay,
+            street
+        )
+        SELECT
+            ?,
+            region,
+            province,
+            city,
+            barangay,
+            street
+            FROM user_addresses
+            WHERE user_id = ?;
+        `, [orderId, userId]);
+
+
+        res.json({ success: true });
+
+    } catch (err) {
+        console.error("Cart error:", err);
+        res.status(500).json({ error: "Server error" });
+    }
+};
